@@ -95,7 +95,7 @@ public class UserRepositoryTests {
 
 	}
 
-	// delete user by id
+	// delete user by id id
 	@Test
 	public void testDeleteUser() {
 
