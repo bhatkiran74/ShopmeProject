@@ -40,6 +40,8 @@ public class UserController {
 
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
+		System.out.println("==========>"+user);
+		System.out.println("==========>"+listRoles);
 		return "user_form";
 	}
 
