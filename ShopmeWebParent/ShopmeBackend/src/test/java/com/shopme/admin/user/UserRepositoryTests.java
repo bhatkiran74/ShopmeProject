@@ -106,12 +106,16 @@ public class UserRepositoryTests {
 	}
 	
 	
-	
+	@Test
 	public void testGetUserByEmail() {
 		
-		String email = "abc@def.com";
+		String email = "abssc@def.com";
 		
 		User user = repo.getUserByEmail(email);
+		
+		
+		System.out.println(user);
+		
 		
 		assertThat(user).isNotNull();
 		

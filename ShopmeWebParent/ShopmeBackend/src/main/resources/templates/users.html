@@ -10,6 +10,13 @@
 
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/fontawesome/all.css}">
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/style.css}">
+
+
 
 
 
@@ -68,14 +75,14 @@
 		</div>
 
 
-	<div th:if="${message !=null}" class="alert alert-success text-center">
-		[[${message}]]
-	</div>
+		<div th:if="${message !=null}" class="alert alert-success text-center">
+			[[${message}]]</div>
 
 		<div>
 
 
-			<table class="table table-bordered table-striped table-hover table-responsive-xl">
+			<table
+				class="table table-bordered table-striped table-hover table-responsive-xl">
 
 				<thead class="thead-dark">
 					<tr>
@@ -104,17 +111,25 @@
 				</thead>
 
 				<tbody>
-						<tr th:each="user : ${listUsers}">
-							<td>[[${user.id}]] </td>
-							<td> </td>
-							<td>[[${user.email}]] </td>
-							<td>[[${user.firstName}]] </td>
-							<td>[[${user.lastName}]] </td>
-							<td>[[${user.roles}]] </td>
-							<td>[[${user.enabled}]] </td>
-							<td>Edit | Delete  </td>
+					<tr th:each="user : ${listUsers}">
+						<td>[[${user.id}]]</td>
+						<td> <span class="fas fa-portrait fa-3x icon-silver"></span>	</td>
+						<td>[[${user.email}]]</td>
+						<td>[[${user.firstName}]]</td>
+						<td>[[${user.lastName}]]</td>
+						<td>[[${user.roles}]]</td>
+						<td><a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x icon-green" href="#"></a>	
+						<a th:if="${user.enabled == false}" class="fas fa-check-circle fa-2x icon-dark" href="#"></a>	</td>
+						<td> 
 						
-						</tr>
+						<a class="fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/'+${user.id}}"  title="Edit User"></a>	
+						&nbsp;
+						<a class="fas fa-trash fa-2x icon-dark" href="#"></a>	
+						
+						
+						</td>
+
+					</tr>
 
 				</tbody>
 
