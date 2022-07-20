@@ -132,7 +132,19 @@ public class UserRepositoryTests {
 		
 	}
 	
+	@Test
+	public void testDisabledUser() {
+		Integer id=1;
+		
+		repo.updateEnabledStatus(id, false);
+	}
 	
+	@Test
+	public void testEnabledUser() {
+		Integer id=1;
+		
+		repo.updateEnabledStatus(id, true);
+	}
 	
 	
 

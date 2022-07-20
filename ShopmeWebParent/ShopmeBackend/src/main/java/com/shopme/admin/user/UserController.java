@@ -42,7 +42,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("pageTitle", "Create New User");
-		
+
 		return "user_form";
 	}
 
@@ -64,7 +64,7 @@ public class UserController {
 			List<Role> listRoles = userService.listRoles();
 			model.addAttribute("user", user);
 			model.addAttribute("listRoles", listRoles);
-			model.addAttribute("pageTitle", "Edit User (Id)"+id+")");
+			model.addAttribute("pageTitle", "Edit User (Id)" + id + ")");
 			return "user_form";
 
 		} catch (UserNotFoundException e) {
@@ -74,15 +74,15 @@ public class UserController {
 		}
 
 	}
-	
-	
+
 	@GetMapping("/users/delete/{id}")
-	public String deleteUser(@PathVariable(name = "id")Integer id, Model model, RedirectAttributes redirectAttributes) {
-		
+	public String deleteUser(@PathVariable(name = "id") Integer id, Model model,
+			RedirectAttributes redirectAttributes) {
+
 		try {
-		
+
 			userService.delete(id);
-			redirectAttributes.addFlashAttribute("message", "The user has been successfully deleted..."+id);
+			redirectAttributes.addFlashAttribute("message", "The user has been successfully deleted..." + id);
 
 		} catch (UserNotFoundException e) {
 
@@ -90,14 +90,21 @@ public class UserController {
 		}
 
 		return "redirect:/users";
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("/users/{id}/enabled/{status}")
+	public String updateUserEnabledStatus(@PathVariable(name = "id") Integer id,
+			@PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes) {
+
+		userService.updateEnabledstatus(id, enabled);
+		String status = enabled ? "enabled" : "disabled";
+		String message = "The User Id " + id + " has been " + status;
+
+		redirectAttributes.addFlashAttribute("message", message);
+
+		return "redirect:/users";
+
+	}
 
 }
