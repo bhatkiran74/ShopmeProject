@@ -21,7 +21,7 @@ public class UserService {
 
 	@Autowired
 	private RoleRepository roleRepo;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -33,7 +33,7 @@ public class UserService {
 		return (List<Role>) roleRepo.findAll();
 	}
 
-	public void save(User user) {
+	public User save(User user) {
 
 		boolean isUpdatingUser = (user.getId() != null);
 
@@ -52,24 +52,20 @@ public class UserService {
 			encoderPassword(user);
 		}
 
-		userRepo.save(user);
+		return userRepo.save(user);
 	}
-	
-	
+
 	private void encoderPassword(User user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 	}
-	
-	
-	
-	
-	public boolean isEmailUnique(Integer id,String email){
-		
+
+	public boolean isEmailUnique(Integer id, String email) {
+
 		User userByEmail = userRepo.getUserByEmail(email);
-		
+
 //		return userByEmail == null;
-		
+
 		if (userByEmail == null)
 			return true;
 
@@ -91,27 +87,26 @@ public class UserService {
 
 		try {
 			return userRepo.findById(id).get();
-			
+
 		} catch (NoSuchElementException e) {
-			throw  new UserNotFoundException("Could not find any user with ID : "+id);
+			throw new UserNotFoundException("Could not find any user with ID : " + id);
 		}
 	}
 
 	public void delete(Integer id) throws UserNotFoundException {
-		
+
 		Long countById = userRepo.countById(id);
-		
-		if (countById==null || countById ==0) {
-			throw new UserNotFoundException("Could not find any user with id : "+id);
-			
+
+		if (countById == null || countById == 0) {
+			throw new UserNotFoundException("Could not find any user with id : " + id);
+
 		} else {
-				userRepo.deleteById(id);
+			userRepo.deleteById(id);
 		}
-		
+
 	}
 
-	
-	public void updateEnabledstatus(Integer id,boolean enabled) {
+	public void updateEnabledstatus(Integer id, boolean enabled) {
 		userRepo.updateEnabledStatus(id, enabled);
 	}
 
