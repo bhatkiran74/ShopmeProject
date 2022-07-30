@@ -34,23 +34,17 @@ public class UserController {
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
 
-		return listByPage(1, model,"firstName","asc",null);
+		return listByPage(1, model, "firstName", "asc", null);
 	}
 
 	@GetMapping("/users/page/{pageNum}")
-	public String listByPage(
-			@PathVariable(name = "pageNum") int pageNum, Model model,
-			@Param("sortField")String sortField,
-			@Param("sortDir")String sortDir,
-			@Param("keyword")String keyword
-			) {
+	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model,
+			@Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
 
-		
-		System.out.println("Sort Field : "+sortField);
-		System.out.println("Sort order : "+sortDir);
-		
-		
-		Page<User> page = userService.listByPage(pageNum,sortField,sortDir,keyword);
+		System.out.println("Sort Field : " + sortField);
+		System.out.println("Sort order : " + sortDir);
+
+		Page<User> page = userService.listByPage(pageNum, sortField, sortDir, keyword);
 		List<User> listUsers = page.getContent();
 
 		long startCount = (pageNum - 1) * userService.USERS_PER_PAGE + 1;
@@ -59,9 +53,8 @@ public class UserController {
 			endCount = page.getTotalElements();
 		}
 
-		
-		String reverseSortDir = sortDir.equals("asc")?"desc":"asc";
-		
+		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -120,8 +113,8 @@ public class UserController {
 	}
 
 	private String getRedirectURLtoAffectedUser(User user) {
-		String firstPartOfEmail=user.getEmail().split("@")[0];
-		return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword="+firstPartOfEmail;
+		String firstPartOfEmail = user.getEmail().split("@")[0];
+		return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword=" + firstPartOfEmail;
 	}
 
 	@GetMapping("/users/edit/{id}")
@@ -174,20 +167,23 @@ public class UserController {
 		return "redirect:/users";
 
 	}
-	
-	
+
 	@GetMapping("/users/export/csv")
-	public void exportToCSV( HttpServletResponse reponse ) throws IOException {
-		List<User> list =userService.listAll(); 
+	public void exportToCSV(HttpServletResponse reponse) throws IOException {
+		List<User> list = userService.listAll();
 		UserCsvExporter exporter = new UserCsvExporter();
-		
+
 		exporter.export(list, reponse);
 	}
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("/users/export/excel")
+	public void exportToExcel(HttpServletResponse reponse) throws IOException {
+
+		List<User> list = userService.listAll();
+		UserExcelExporter exporter = new UserExcelExporter();
+
+		exporter.export(list, reponse);
+
+	}
 
 }
