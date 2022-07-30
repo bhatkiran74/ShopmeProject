@@ -69,10 +69,13 @@
 
 		<div>
 			<h1>Manage Users</h1>
-			<a class="btn btn-success ml-1" th:href="@{/users/new}">Create
-				New User</a> &nbsp;|&nbsp; <a th:href="@{/users/export/csv}">Export
-				CSV</a>&nbsp;|&nbsp; <a th:href="@{/users/export/excel}">Export
-				Excel</a>&nbsp;|&nbsp; <a th:href="@{/users/export/pdf}">Export PDF</a>&nbsp;|&nbsp;
+			<a class="fas fa-user-plus fa-2x icon-dark" title="Create User" th:href="@{/users/new}"></a>
+			&nbsp;&nbsp; <a class="fas fa-file-csv fa-2x icon-dark"
+				th:href="@{/users/export/csv}" title="CSV"></a> &nbsp;&nbsp; <a
+				class="fas fa-file-excel fa-2x icon-dark"
+				th:href="@{/users/export/excel}" title="Excel"></a> &nbsp;&nbsp; <a
+				class="fas fa-file-pdf fa-2x icon-dark"
+				th:href="@{/users/export/pdf}" title="Pdf"></a>&nbsp;&nbsp;
 		</div>
 
 
