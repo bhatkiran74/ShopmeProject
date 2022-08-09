@@ -77,7 +77,7 @@ public class UserController {
 		user.setEnabled(true);
 		List<Role> listRoles = userService.listRoles();
 
-//		System.out.println(listRoles);
+		System.out.println(listRoles);
 
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
