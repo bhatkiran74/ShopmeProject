@@ -147,7 +147,10 @@
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
+
+	moduleURL="[[@{/users}]]"
+	
+	/* 	$(document).ready(function() {
 
 			$("#buttonCancle").on("click", function() {
 				window.location = "[[@{/users}]]";
@@ -190,7 +193,7 @@
 			
 			reader.readAsDataURL(file);
 		}
-		
+		 */
 		
 		
 		
@@ -249,7 +252,7 @@
 		}
 	</script>
 
-
+<script th:src="@{/js/common_form.js}"></script>
 
 </body>
 </html>

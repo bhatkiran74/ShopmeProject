@@ -6,12 +6,6 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu" />
 
-
-
-		
-
-
-
 		
 			<form th:action="@{/account/update}" method="post"
 				style="max-width: 700px; margin: 0 auto" th:object="${user}"
@@ -146,44 +140,9 @@
 	</div>
 
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-
-							$("#buttonCancle").on("click", function() {
-								window.location = "[[@{/users}]]";
-							})
-
-							$("#fileImage")
-									.change(
-											function() {
-
-												fileSize = this.files[0].size;
-
-												if (fileSize > 1048576) {
-													this
-															.setCustomValidity("You must choose an image less than 1MB");
-													this.reportValidity();
-												} else {
-													this.setCustomValidity("");
-
-													showImageThumbnail(this);
-												}
-
-											})
-
-						})
-
-		function showImageThumbnail(fileInput) {
-			var file = fileInput.files[0];
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#thumbnail").attr("src", e.target.result);
-			}
-
-			reader.readAsDataURL(file);
-		}
 		
+	moduleURL="[[@{/}]]"
+	
 		function checkPasswordMatch(confirmPassword){
 			
 			if(confirmPassword.value !=$("#password").val()){
@@ -200,7 +159,7 @@
 		
 		
 	</script>
-
+<script th:src="@{/js/common_form.js}"></script>
 
 
 </body>
