@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+
+<head th:replace="fragments :: page_head('Users - Shopme')" />
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="navigation :: menu" />
+
+
+		<div>
+			<h1>Manage Users</h1>
+			<a class="fas fa-folder-plus fa-2x icon-dark" title="Create Category" th:href="@{/categories/new}"></a> 
+				
+				
+				
+				
+				 <a
+				class="fas fa-file-csv fa-2x icon-dark"
+				th:href="@{/users/export/csv}" title="CSV"></a> 
+				
+				
+				
+				<!-- &nbsp;&nbsp; <a
+				class="fas fa-file-excel fa-2x icon-dark"
+				th:href="@{/users/export/excel}" title="Excel"></a> &nbsp;&nbsp; <a
+				class="fas fa-file-pdf fa-2x icon-dark"
+				th:href="@{/users/export/pdf}" title="Pdf"></a>&nbsp;&nbsp; -->
+		</div>
+
+
+		<div th:if="${message !=null}" class="alert alert-success text-center">
+			[[${message}]]</div>
+
+		<div>
+			<form th:action="@{/users/page/1}" class="form-inline m-3">
+
+				<input type="hidden" name="sortField" th:value="${sortField}" /> <input
+					type="hidden" name="sortDir" th:value="${sortDir}" /> Filter :
+				&nbsp;&nbsp; <input type="search" name="keyword"
+					th:value="${keyword}" class="form-control" required="required" />
+
+				&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary">
+					<i class="fas fa-search"></i>
+				</button>
+				&nbsp;&nbsp;
+
+				<button type="button" value="Clear" onclick="clearFilter()"
+					class="btn btn-secondary">
+					<i class="fas fa-eraser"></i>
+				</button>
+
+
+
+			</form>
+
+
+		</div>
+
+
+
+
+		<div class="full-details">
+
+			<table
+				class="table table-bordered table-striped table-hover table-responsive-xl">
+
+				<thead class="thead-dark">
+					<tr>
+
+						<th>Id</th>
+						<th>Category Iamge</th>
+						<th>Category Name</th>
+						<th>Alias</th>
+						<th>Enabled</th>
+						<th></th>
+					</tr>
+
+				</thead>
+
+				<tbody>
+					<tr th:each="cat : ${listCategories}">
+						<td class="hideable-column">[[${cat.id}]]</td>
+						<td></td>
+						<td>[[${cat.name}]]</td>
+						<td>[[${cat.alias}]]</td>
+						<td>
+							<a class="fas fa-circle fa-2x icon-dark" ></a>
+						</td>
+						<td>
+							<a class="fas fa-edit fa-2x icon-green"  title="Edit User"></a>
+							&nbsp; 
+							<a class="fas fa-trash fa-2x icon-dark link-delete" title="Delete User"></a>
+						</td>
+						
+					</tr>
+
+				</tbody>
+
+
+			</table>
+
+		</div>
+
+	
+
+ 	<div th:replace="fragments :: footer"></div>
+ 
+		
+	</div>
+
+
+	<script type="text/javascript">
+		</script>
+
+
+
+
+
+</body>
+</html>
