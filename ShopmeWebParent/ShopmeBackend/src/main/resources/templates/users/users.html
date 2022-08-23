@@ -143,10 +143,13 @@
 							title="Disable User"></a> <a th:if="${user.enabled == false}"
 							class="fas fa-circle fa-2x icon-dark"
 							th:href="@{'/users/'+${user.id}+'/enabled/true'}"
-							title="Enabled User"></a> &nbsp; <a
+							title="Enabled User">
+							
+							</a> &nbsp; <a
 							class="fas fa-edit fa-2x icon-green"
 							th:href="@{'/users/edit/'+${user.id}}" title="Edit User"></a>
-						&nbsp; <a class="fas fa-trash fa-2x icon-dark link-delete"
+						&nbsp; 
+						<a class="fas fa-trash fa-2x icon-dark link-delete"
 							th:userId="${user.id}" th:href="@{'/users/delete/'+${user.id}}"
 							title="Delete User"></a>
 

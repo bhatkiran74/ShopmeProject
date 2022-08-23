@@ -7,16 +7,14 @@
 <head th:replace="fragments :: page_head('Users - Shopme')" />
 
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid"></div>
+	
 		<div th:replace="navigation :: menu" />
 
 
 		<div>
 			<h1>Manage Users</h1>
 			<a class="fas fa-folder-plus fa-2x icon-dark" title="Create Category" th:href="@{/categories/new}"></a> 
-				
-				
-				
 				
 				 <a
 				class="fas fa-file-csv fa-2x icon-dark"
@@ -34,6 +32,8 @@
 
 		<div th:if="${message !=null}" class="alert alert-success text-center">
 			[[${message}]]</div>
+
+		<div>
 
 		<div>
 			<form th:action="@{/users/page/1}" class="form-inline m-3">
@@ -85,14 +85,27 @@
 				<tbody>
 					<tr th:each="cat : ${listCategories}">
 						<td class="hideable-column">[[${cat.id}]]</td>
-						<td></td>
+						<td>  <img  th:src="@{${cat.imagePath}}" th:alt="${cat.image}" width="100px">  
+						
+						</td>
+
+						
 						<td>[[${cat.name}]]</td>
 						<td>[[${cat.alias}]]</td>
-						<td>
+					<!-- 	<td>
 							<a class="fas fa-circle fa-2x icon-dark" ></a>
-						</td>
+						</td> -->
+						
+						<td><a th:if="${cat.enabled == true}"
+							class="fas fa-check-circle fa-2x icon-green" 
+							title="Disable User"></a> <a th:if="${cat.enabled == false}"
+							class="fas fa-circle fa-2x icon-dark"
+							title="Enabled User"></a></td>
+						
+						
 						<td>
-							<a class="fas fa-edit fa-2x icon-green"  title="Edit User"></a>
+							<a class="fas fa-edit fa-2x icon-green"
+							th:href="@{'/categories/edit/'+${cat.id}}"  title="Edit User"></a>
 							&nbsp; 
 							<a class="fas fa-trash fa-2x icon-dark link-delete" title="Delete User"></a>
 						</td>

@@ -120,5 +120,15 @@ public class CategoryRepositoryTests {
 	
 	
 	
+	@Test
+	public void testListRootCategories(){
+		
+		List<Category> categories = repo.findRootCategories();
+		categories.forEach(cat -> System.out.println(cat.getName()));
+		
+		
+	}
+	
+	
 	
 }
