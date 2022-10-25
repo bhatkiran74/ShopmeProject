@@ -110,7 +110,7 @@
 
 
 
-		<div class="modal fade text-center" id="modalDialog">
+		<!-- <div class="modal fade text-center" id="modalDialog">
 
 			<div class="modal-dialog">
 
@@ -134,10 +134,11 @@
 
 
 
-		</div>
+		</div> -->
 
 
 
+<div th:replace="modal_fragments :: modal_dialog"></div>
 
 
 
@@ -227,29 +228,25 @@
 						if (response == "OK") {
 							form.submit();
 						} else if (response == "Duplicated") {
-							showModalDialog("warning",
-									"There is another user having the email :   "
+							showWarningModal("There is another user having the email :   "
 											+ userEmail);
 						} else {
-							showModalDialog("Error",
-									"unknown response from server");
+							showErrorModal("unknown response from server");
 						}
 
 					}).fail(function() {
-				showModalDialog("Error", "could not to connect to the server");
+				showErrorModal("could not to connect to the server");
 
 			})
 
 			return false;
 		}
 
-		function showModalDialog(title, message) {
-
-			$("#modalTitle").text(title);
-			$("#modalBody").text(message);
-			$("#modalDialog").modal();
-
-		}
+		
+		
+		
+		
+		
 	</script>
 
 <script th:src="@{/js/common_form.js}"></script>

@@ -17,6 +17,7 @@
 
 		<form th:action="@{/categories/save}" method="post"
 			style="max-width: 700px; margin: 0 auto" th:object="${category}"
+			onsubmit="return checkUnique(this)"
 			enctype="multipart/form-data">
 
 			<input type="hidden" th:field="*{id}" />
@@ -129,7 +130,7 @@
 
 
 
-
+<div th:replace="modal_fragments :: modal_dialog"></div>
 
 		<div th:replace="fragments :: footer"></div>
 	</div>
@@ -137,6 +138,55 @@
 	<script type="text/javascript">
 	moduleURL = "[[@{/categories}]]"
 	
+	
+	function checkUnique(form) {
+
+			catId = $("#id").val(); // print id		
+			catName = $("#name").val(); // print email
+			catAlias = $("#alias").val(); // print email
+			
+			csrValue = $("input[name='_csrf']").val();
+			
+			url = "[[@{/categories/check_unique}]]";
+
+
+			params = {
+				id : catId,
+				name:catName,
+				alias:catAlias,
+				_csrf : csrValue
+			};
+
+			//("#modalDialog").modal();
+
+			//if(true) return false;
+
+			$.post(
+					url,
+					params,
+					function(response) {
+
+					if (response == "OK") {
+							form.submit();
+						} else if (response == "DuplicateName") {
+							showWarningModal("There is another user having the same name :   "
+											+ catName);
+						}else if (response == "DuplicateAlias") {
+							showWarningModal("There is another user having the Alias :   "
+											+ catAlias);
+						}
+						 else {
+							showErrorModal("unknown response from server");
+						}									
+
+					}).fail(function() {
+				alert("failed")			
+			})
+
+			return false;
+		}
+	
+
 	
 		
 	</script>

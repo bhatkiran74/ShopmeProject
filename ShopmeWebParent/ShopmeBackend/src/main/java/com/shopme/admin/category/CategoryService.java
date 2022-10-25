@@ -126,6 +126,37 @@ public class CategoryService {
 	
 	
 	
+	public String checkUnique(Integer id, String name,String alias) {
+		boolean isCreatingNew = (id==null|| id==0);
+		
+		Category categoryByName= repo.findByName(name);
+		if (isCreatingNew) {
+			
+			if (categoryByName!=null) {
+				return "DuplicateName";
+			}
+			else {
+				
+				Category categoryAlias = repo.findByAlias(alias);
+				if (categoryAlias !=null) {
+					return "DuplicateAlias";
+					
+				}
+			}
+			
+		}
+		else {
+			if (categoryByName!=null&& categoryByName.getId() !=id) {
+				return "DuplicateName";
+			}
+			
+			Category categoryByAlias = repo.findByAlias(alias);
+			if (categoryByAlias!=null&& categoryByAlias.getId() !=id) {
+				return "DuplicateAlias";	
+			}
+		}
+		return "OK";
+	}
 	
 	
 	
